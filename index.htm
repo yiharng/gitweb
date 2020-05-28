@@ -48,6 +48,11 @@
         {
             height:3em;
         }
+        button
+        {
+            font-size:1em;
+            width:2em;
+        }
     </style>
 </head>
 <body>
@@ -105,9 +110,44 @@
         </div>
     </div>
 
+    <div style="position:absolute;left:0.5em;top:0.2em">
+        <button id="fmda">+</button>
+        <button id="fmds">-</button>
+    </div>
+    <div style="position:absolute;right:0.5em;top:0.2em">
+        <button id="fhtma">+</button>
+        <button id="fhtms">-</button>
+    </div>
+
     <script>
+        var ffmd=16;
+        var ffhtm=16;
+
         $(function()
         {
+            $("#fmda").on("click",()=>
+            {
+                ffmd++;
+                $("#idmd").css("font-size",ffmd+"px");
+            })
+            $("#fmds").on("click",()=>
+            {
+                ffmd--;
+                $("#idmd").css("font-size",ffmd+"px");
+            })
+            $("#fhtma").on("click",()=>
+            {
+                ffhtm++;
+                $("#idhtm").css("font-size",ffhtm+"px");
+            })
+            $("#fhtms").on("click",()=>
+            {
+                ffhtm--;
+                $("#idhtm").css("font-size",ffhtm+"px");
+            })
+            $("#idmd").css("font-size",ffmd+"px");
+            $("#idhtm").css("font-size",ffhtm+"px");
+
             function update()
             {
                 $("#idhtm").html(marked($("#idmd").val()));
