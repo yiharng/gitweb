@@ -4,9 +4,21 @@
     <title>Markdown</title>
     <link rel="stylesheet" href="highlight.min.css">
     <style>
+        .title
+        {
+            position:absolute;
+            top:0px;
+            left:0px;
+            height:2em;
+            width:100%;
+            text-align:center;
+            font-size:1.5em;
+        }
         .cc
         {
-            float:left;
+            position:absolute;
+            top:2em;
+            left:1%;
             width:49%;
             height:calc( 100% - 8em );
             border:1px solid #000000;
@@ -14,12 +26,15 @@
         }
         .res
         {
-            width:calc( 98% - 2px );
+            position:absolute;
+            top:calc( 100% - 6em );
+            left:1%;
+            width:calc( 98% );
             height:5em;
             border:1px solid #000000;
             overflow:auto;
             white-space: nowrap;
-            padding:2px;
+            padding:0.5em 0px 0px 0px;
         }
         .res_item
         {
@@ -41,14 +56,40 @@
     <script src="highlight.min.js"></script>
     <script src="highlight.pack.js"></script>
 
-    <div style="text-align:center;font-size:1.5em">
+    <div class="title">
     Markdown and css and javascript tester
     </div>
 
-    <div class="cc">
-        <textarea id="idmd" style="width:100%;height:100%"></textarea>
+    <div class="cc" style="left:1%">
+        <textarea id="idmd" style="width:100%;height:100%;font-size:1em">
+## This is a Markdown tester
+<img src="bomb.png">
+
+```
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>Markdown</title>
+    </head>
+    <body>
+
+    </body>
+</html>
+```
+
+```
+    function test()
+    {
+        var k=
+        {
+            a:1,
+            b:"222"
+        }
+    }
+```
+        </textarea>
     </div>
-    <div class="cc" >
+    <div class="cc" style="left:50%;">
         <div id="idhtm" style="padding:1em;"></div>
     </div><br>
     <div class="res">
@@ -67,18 +108,17 @@
     <script>
         $(function()
         {
-            let hh="";
-
-            hh+="## This is a Markdown tester\n"
-            +"<img src='bomb.png' width=30>\n"
-
-            $("#idmd").val(hh);
-            $("#idhtm").html(marked($("#idmd").val()));
-
-            $("#idmd").on("input",()=>
+            function update()
             {
                 $("#idhtm").html(marked($("#idmd").val()));
                 document.querySelectorAll("pre code").forEach((block)=>{hljs.highlightBlock(block)});
+            }
+
+            update();
+
+            $("#idmd").on("input",()=>
+            {
+                update();
             })
         })
     </script>
