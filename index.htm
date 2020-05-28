@@ -1,9 +1,86 @@
 <html>
 <head>
-<meta charset="utf-8">
-<title>test</title>
+    <meta charset="utf-8">
+    <title>Markdown</title>
+    <link rel="stylesheet" href="highlight.min.css">
+    <style>
+        .cc
+        {
+            float:left;
+            width:49%;
+            height:calc( 100% - 8em );
+            border:1px solid #000000;
+            overflow:auto;
+        }
+        .res
+        {
+            width:calc( 98% - 2px );
+            height:5em;
+            border:1px solid #000000;
+            overflow:auto;
+            white-space: nowrap;
+            padding:2px;
+        }
+        .res_item
+        {
+            display:inline-block;
+            width:5em;
+            height:5em;
+            overflow:auto;
+            text-align:center;
+        }
+        .res_item img
+        {
+            height:3em;
+        }
+    </style>
 </head>
 <body>
-Hello World.
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="marked.min.js"></script>
+    <script src="highlight.min.js"></script>
+    <script src="highlight.pack.js"></script>
+
+    <div style="text-align:center;font-size:1.5em">
+    Markdown and css and javascript tester
+    </div>
+
+    <div class="cc">
+        <textarea id="idmd" style="width:100%;height:100%"></textarea>
+    </div>
+    <div class="cc" >
+        <div id="idhtm" style="padding:1em;"></div>
+    </div><br>
+    <div class="res">
+        <div id="idsrc">
+            <div class="res_item">
+                <img src="bomb.png"><br>
+                <span>bomb.png</span>
+            </div>
+            <div class="res_item">
+                <img src="bird.jpg"><br>
+                <span>bird.jpg</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function()
+        {
+            let hh="";
+
+            hh+="## This is a Markdown tester\n"
+            +"<img src='bomb.png' width=30>\n"
+
+            $("#idmd").val(hh);
+            $("#idhtm").html(marked($("#idmd").val()));
+
+            $("#idmd").on("input",()=>
+            {
+                $("#idhtm").html(marked($("#idmd").val()));
+                document.querySelectorAll("pre code").forEach((block)=>{hljs.highlightBlock(block)});
+            })
+        })
+    </script>
 </body>
 </html>
