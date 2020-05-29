@@ -88,7 +88,8 @@ function markdown_mm()
             hljs.highlightBlock(cc[u]);
         }
 
-        kk.css("display","none");
+        $(kk[i]).attr("markdown_ok","ok");
+        $(kk[i]).css("display","none");
 
     }
 
