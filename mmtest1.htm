@@ -1,0 +1,153 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>mmtest</title>
+    </head>
+    <body>
+        <textarea class="markdown_mm" style="display: block;">
+# testmm            
+        </textarea>
+
+            <textarea class="markdown_mm" style="display: block;">
+以這篇文章為例，在 Blogger 看 HTML 原始碼長這樣，最大缺點是每篇文章必須給不一樣的 ID ，以及 textarea 這個關鍵字必須特別處理
+
+```
+<link href="https://yiharng.github.io/highlight.min.css" rel="stylesheet"></link>
+<script src="https://yiharng.github.io/jquery-3.4.1.min.js"></script>
+<textarea style="display: none;">
+文章放這裡
+$/textarea>
+```
+所以把程式整理打包一下，成果如下:
+
+```
+$code(r1)
+
+```
+
+```
+$code(r2)
+
+```
+
+
+<div class="result r1">
+<style>
+.txt
+{
+    color:#0000ff;
+}
+.txt::before
+{
+    content:"[" attr(btxt) "]";
+    color:#ff0000;
+}
+.txt::after
+{
+    content:"[" attr(atxt) "]";
+    color:#00ff00;
+}
+</style>
+
+<span class="txt" btxt="Before" atxt="After">我是文字</span>
+</div>
+
+
+<div class="result r2">
+    <div>i am r2</div>
+</div>
+            </textarea>
+
+
+        <script src="mm.js"></script>
+        <script>
+            function domarked2(id)
+            {
+                $(id).append("<style>"+".hljs-comment,.hljs-quote{color:#969896}.hljs-variable,.hljs-template-variable,.hljs-tag,.hljs-name,.hljs-selector-id,.hljs-selector-class,.hljs-regexp,.hljs-deletion{color:#d54e53}.hljs-number,.hljs-built_in,.hljs-builtin-name,.hljs-literal,.hljs-type,.hljs-params,.hljs-meta,.hljs-link{color:#e78c45}.hljs-attribute{color:#e7c547}.hljs-string,.hljs-symbol,.hljs-bullet,.hljs-addition{color:#b9ca4a}.hljs-title,.hljs-section{color:#7aa6da}.hljs-keyword,.hljs-selector-tag{color:#c397d8}.hljs{display:block;overflow-x:auto;background:#000;color:#eaeaea;padding:.5em}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}"
+                    +'.result{padding:1.5em 1em 1em 1em;border:1px solid #000000;}.result::before{content:"執行結果";position:absolute;transform: translate(-0.3em, -2.3em);background-color:#ffffff;padding:0 0.5em 0 0.5em;border:1px solid #000000;}'
+                    +"</style>");
+
+                let t=$(id+" textarea").val().replace(/\$\/textarea>/g,"</textarea>");
+                let kc=t.match(/\$code\(.*\)/g);
+                if (kc)
+                {
+                    let hk=$("<div>"+t+"</div>");
+                    let i;
+
+                    for (i in kc)
+                    {
+                        let j=kc[i].match(/\((.*)\)/)[1];
+                        let hh=hk.find(".result."+j).html();
+                        t=t.replace("$code("+j+")",hh);
+                    }
+                    top.hk=hk;
+                }
+                let k=marked(t);
+
+                top.k=k;
+                top.kc=kc;
+                
+                $(id+" div").html(k);
+                document.querySelectorAll(id+" div pre code").forEach((block)=>{hljs.highlightBlock(block)});
+
+            }            
+
+            function markdown_mm()
+            {
+                let kk=$("textarea.markdown_mm");
+                let i;
+                let docss=0;
+
+                for (i=0;i<kk.length;i++)
+                {
+                    if ($(kk[i]).attr("markdown_ok")) continue;
+                    docss++;
+
+                    let txt=$(kk[i]);
+                    txt.after("<div></div>");
+                    let tdiv=txt.next();
+
+                    let t=txt.val().replace(/\$\/textarea>/g,"</textarea>");
+                    let kc=t.match(/\$code\(.*\)/g);
+                    if (kc)
+                    {
+                        let hk=$("<div>"+t+"</div>");
+                        let ii;
+
+                        for (ii in kc)
+                        {
+                            let j=kc[ii].match(/\((.*)\)/)[1];
+                            let hh=hk.find(".result."+j).html();
+                            t=t.replace("$code("+j+")",hh);
+                        }
+                    }
+                    let k=marked(t);
+
+                    tdiv.html(k);
+
+                    let cc=tdiv.find("pre code");
+                    let u;
+
+                    for (u=0;cc && u<cc.length;u++)
+                    {
+                        hljs.highlightBlock(cc[u]);
+                    }
+
+                    kk.css("display","none");
+
+//                    document.querySelectorAll(id+" div pre code").forEach((block)=>{hljs.highlightBlock(block)});
+                }
+
+                if (docss)
+                {
+                    $("body").append("<style>"+".hljs-comment,.hljs-quote{color:#969896}.hljs-variable,.hljs-template-variable,.hljs-tag,.hljs-name,.hljs-selector-id,.hljs-selector-class,.hljs-regexp,.hljs-deletion{color:#d54e53}.hljs-number,.hljs-built_in,.hljs-builtin-name,.hljs-literal,.hljs-type,.hljs-params,.hljs-meta,.hljs-link{color:#e78c45}.hljs-attribute{color:#e7c547}.hljs-string,.hljs-symbol,.hljs-bullet,.hljs-addition{color:#b9ca4a}.hljs-title,.hljs-section{color:#7aa6da}.hljs-keyword,.hljs-selector-tag{color:#c397d8}.hljs{display:block;overflow-x:auto;background:#000;color:#eaeaea;padding:.5em}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}"
+                    +'.result{padding:1.5em 1em 1em 1em;border:1px solid #000000;}.result::before{content:"執行結果";position:absolute;transform: translate(-0.3em, -2.3em);background-color:#ffffff;padding:0 0.5em 0 0.5em;border:1px solid #000000;}'
+                    +"</style>");
+                }
+            }
+
+            markdown_mm();
+//            domarked2();
+        </script>
+    </body>
+</html>
