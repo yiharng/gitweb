@@ -63,7 +63,7 @@ function markdown_mm()
         let tdiv=txt.next();
 
         let t=txt.val().replace(/\$\/textarea>/g,"</textarea>");
-        let kc=t.match(/\$code\(.*\)/g);
+        let kc=t.match(/\$mmcode\(.*\)/g);
         if (kc)
         {
             let hk=$("<div>"+t+"</div>");
@@ -72,8 +72,8 @@ function markdown_mm()
             for (ii in kc)
             {
                 let j=kc[ii].match(/\((.*)\)/)[1];
-                let hh=hk.find(".result."+j).html();
-                t=t.replace("$code("+j+")",hh);
+                let hh=hk.find(".mmresult."+j).html();
+                t=t.replace("$mmcode("+j+")",hh);
             }
         }
         let k=marked(t);
@@ -91,12 +91,13 @@ function markdown_mm()
         $(kk[i]).attr("markdown_ok","ok");
         $(kk[i]).css("display","none");
 
+//                    document.querySelectorAll(id+" div pre code").forEach((block)=>{hljs.highlightBlock(block)});
     }
 
     if (docss)
     {
         $("body").append("<style>"+".hljs-comment,.hljs-quote{color:#969896}.hljs-variable,.hljs-template-variable,.hljs-tag,.hljs-name,.hljs-selector-id,.hljs-selector-class,.hljs-regexp,.hljs-deletion{color:#d54e53}.hljs-number,.hljs-built_in,.hljs-builtin-name,.hljs-literal,.hljs-type,.hljs-params,.hljs-meta,.hljs-link{color:#e78c45}.hljs-attribute{color:#e7c547}.hljs-string,.hljs-symbol,.hljs-bullet,.hljs-addition{color:#b9ca4a}.hljs-title,.hljs-section{color:#7aa6da}.hljs-keyword,.hljs-selector-tag{color:#c397d8}.hljs{display:block;overflow-x:auto;background:#000;color:#eaeaea;padding:.5em}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}"
-        +'.result{padding:1.5em 1em 1em 1em;border:1px solid #000000;}.result::before{content:"執行結果";position:absolute;transform: translate(-0.3em, -2.3em);background-color:#ffffff;padding:0 0.5em 0 0.5em;border:1px solid #000000;}'
+        +'.mmresult{padding:1.5em 1em 1em 1em;border:1px solid #000000;}.mmresult::before{content:"執行結果";position:absolute;transform: translate(-0.3em, -2.3em);background-color:#ffffff;padding:0 0.5em 0 0.5em;border:1px solid #000000;}'
         +"</style>");
     }
 }
