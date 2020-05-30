@@ -96,12 +96,16 @@ $mmcode(r2)
             {
                 let kk=$("textarea.markdown_mm");
                 let i;
-                let docss=0;
+                let docss=1;
 
                 for (i=0;i<kk.length;i++)
                 {
-                    if ($(kk[i]).attr("markdown_ok")) continue;
-                    docss++;
+                    if ($(kk[i]).attr("markdown_ok"))
+                    {
+                        docss=0;
+                        continue;
+                    }
+                    $(kk[i]).attr("markdown_ok","ok");
 
                     let txt=$(kk[i]);
                     txt.after("<div></div>");
@@ -133,7 +137,6 @@ $mmcode(r2)
                         hljs.highlightBlock(cc[u]);
                     }
 
-                    $(kk[i]).attr("markdown_ok","ok");
                     $(kk[i]).css("display","none");
 
 //                    document.querySelectorAll(id+" div pre code").forEach((block)=>{hljs.highlightBlock(block)});
