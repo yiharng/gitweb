@@ -92,12 +92,32 @@ $mmcode(r2)
 
             }            
 
-            function markdown_mm()
+            function mmrun(txt,tdiv)
+            {
+                let t=txt.val().replace(/\$\/textarea>/g,"</textarea>");
+                let kc=t.match(/\$mmcode\(.*\)/g);
+                if (kc)
+                {
+                    let hk=$("<div>"+t+"</div>");
+                    let ii;
+
+                    for (ii in kc)
+                    {
+                        let j=kc[ii].match(/\((.*)\)/)[1];
+                        let hh=hk.find(".mmresult."+j).html();
+                        t=t.replace("$mmcode("+j+")",hh);
+                    }
+                }
+                let k=marked(t);
+                tdiv.html(k);
+            }
+            (function()
             {
                 let kk=$("textarea.markdown_mm");
                 let i;
                 let docss=1;
 
+                if (kk.length==0) docss=0;
                 for (i=0;i<kk.length;i++)
                 {
                     if ($(kk[i]).attr("markdown_ok"))
@@ -111,23 +131,7 @@ $mmcode(r2)
                     txt.after("<div></div>");
                     let tdiv=txt.next();
 
-                    let t=txt.val().replace(/\$\/textarea>/g,"</textarea>");
-                    let kc=t.match(/\$mmcode\(.*\)/g);
-                    if (kc)
-                    {
-                        let hk=$("<div>"+t+"</div>");
-                        let ii;
-
-                        for (ii in kc)
-                        {
-                            let j=kc[ii].match(/\((.*)\)/)[1];
-                            let hh=hk.find(".mmresult."+j).html();
-                            t=t.replace("$mmcode("+j+")",hh);
-                        }
-                    }
-                    let k=marked(t);
-
-                    tdiv.html(k);
+                    mmrun(txt,tdiv);
 
                     let cc=tdiv.find("pre code");
                     let u;
@@ -138,8 +142,6 @@ $mmcode(r2)
                     }
 
                     $(kk[i]).css("display","none");
-
-//                    document.querySelectorAll(id+" div pre code").forEach((block)=>{hljs.highlightBlock(block)});
                 }
 
                 if (docss)
@@ -148,9 +150,8 @@ $mmcode(r2)
                     +'.mmresult{padding:1.5em 1em 1em 1em;border:1px solid #000000;}.mmresult::before{content:"執行結果";position:absolute;transform: translate(-0.3em, -2.3em);background-color:#ffffff;padding:0 0.5em 0 0.5em;border:1px solid #000000;}'
                     +"</style>");
                 }
-            }
+            })();
 
-            markdown_mm();
 //            domarked2();
         </script>
     </body>
