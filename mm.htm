@@ -109,11 +109,11 @@ $mmcode(r1)
             idmd.css("font-size",ffmd+"px");
             idhtm.css("font-size",ffhtm+"px");
 
-            mmjs.mmrun(idmd,idhtm);
+            mmjs.mmrun(idmd.val(),idhtm);
 
             idmd.on("input",()=>
             {
-                mmjs.mmrun(idmd,idhtm);
+                mmjs.mmrun(idmd.val(),idhtm);
             })
 
             mmjs.mmdocss();

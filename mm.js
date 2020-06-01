@@ -50,7 +50,7 @@ var hljs=function(){"use strict";function e(n){Object.freeze(n);var t="function"
 var mmjs={
 mmrun:function(txt,tdiv)
 {
-    let t=txt.val().replace(/\$\/textarea>/g,"</textarea>");
+    let t=txt;
     let kc=t.match(/\$mmcode\(.*\)/g);
     if (kc)
     {
@@ -61,12 +61,15 @@ mmrun:function(txt,tdiv)
         {
             let j=kc[ii].match(/\((.*)\)/)[1];
             let hh=hk.find(".mmresult."+j).html();
-            t=t.replace("$mmcode("+j+")",hh);
+            if (hh)
+            {
+                t=t.replace("$mmcode("+j+")",hh);
+            }
         }
     }
     let k=marked(t);
     tdiv.html(k);
-
+    //////////////////////////////
     let cc=tdiv.find("pre code");
     let u;
 
@@ -84,10 +87,12 @@ mmdocss:function()
 }};
 (function()
 {
-    let kk=$("textarea.markdown_mm");
+    let kk=$("mmjs");
+
     let i;
     let docss=1;
 
+    if (kk.length==0) docss=0;
     for (i=0;i<kk.length;i++)
     {
         if ($(kk[i]).attr("markdown_ok"))
@@ -101,7 +106,7 @@ mmdocss:function()
         txt.after("<div></div>");
         let tdiv=txt.next();
 
-        mmjs.mmrun(txt,tdiv);
+        mmjs.mmrun(txt.html(),tdiv);
 
         $(kk[i]).css("display","none");
     }
