@@ -107,7 +107,7 @@ mmdocss:function()
         let tdiv=txt.next();
 
         let vh=txt.val()
-            .replace(/\$\/textarea>/g,"</textarea>")
+            .replace(/\$\/textarea/g,"</textarea")
             .replace(/\$textarea/g,"<textarea");
                 
         if (!vh) vh=txt.html();
