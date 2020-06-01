@@ -87,7 +87,7 @@ mmdocss:function()
 }};
 (function()
 {
-    let kk=$("mmjs");
+    let kk=$("textarea.markdown_mm,mmjs");
 
     let i;
     let docss=1;
@@ -106,7 +106,12 @@ mmdocss:function()
         txt.after("<div></div>");
         let tdiv=txt.next();
 
-        mmjs.mmrun(txt.html(),tdiv);
+        let vh=txt.val()
+            .replace(/\$\/textarea>/g,"</textarea>")
+            .replace(/\$textarea/g,"<textarea");
+                
+        if (!vh) vh=txt.html();
+        mmjs.mmrun(vh,tdiv);
 
         $(kk[i]).css("display","none");
     }
@@ -115,4 +120,5 @@ mmdocss:function()
     {
         mmjs.mmdocss();
     }
+
 })();

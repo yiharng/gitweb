@@ -109,11 +109,17 @@ $mmcode(r1)
             idmd.css("font-size",ffmd+"px");
             idhtm.css("font-size",ffhtm+"px");
 
-            mmjs.mmrun(idmd.val(),idhtm);
+            mmjs.mmrun(idmd.val()
+                .replace(/\$\/textarea>/g,"</textarea>")
+                .replace(/\$textarea/g,"<textarea")
+                ,idhtm);
 
             idmd.on("input",()=>
             {
-                mmjs.mmrun(idmd.val(),idhtm);
+                mmjs.mmrun(idmd.val()
+                .replace(/\$\/textarea>/g,"</textarea>")
+                .replace(/\$textarea/g,"<textarea")
+                ,idhtm);
             })
 
             mmjs.mmdocss();

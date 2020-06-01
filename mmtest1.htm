@@ -8,15 +8,16 @@
 # testmm            
         </mmjs>
 
-            <mmjs style="display: block;">
+            <textarea class="markdown_mm" style="display: block;">
 以這篇文章為例，在 Blogger 看 HTML 原始碼長這樣，最大缺點是每篇文章必須給不一樣的 ID ，以及 textarea 這個關鍵字必須特別處理
 
 ```
 <link href="https://yiharng.github.io/highlight.min.css" rel="stylesheet"></link>
 <script src="https://yiharng.github.io/jquery-3.4.1.min.js"></script>
-<textarea style="display: none;">
+$textarea style="display: none;">
 文章放這裡
-</textarea>
+$/textarea>
+
 ```
 所以把程式整理打包一下，成果如下:
 
@@ -32,6 +33,9 @@ $mmcode(r2)
 
 
 <div class="mmresult r1">
+$textarea>
+asdf
+$/textarea>
 <style>
 .txt
 {
@@ -56,7 +60,7 @@ $mmcode(r2)
 <div class="mmresult r2">
     <div>i am r2</div>
 </div>
-</mmjs>
+</textarea>
 
 <!--
         <script src="mm.js"></script>
@@ -141,7 +145,7 @@ mmdocss:function()
 
             (function()
             {
-                let kk=$("mmjs");
+                let kk=$("textarea.markdown_mm,mmjs");
 
                 let i;
                 let docss=1;
@@ -160,7 +164,12 @@ mmdocss:function()
                     txt.after("<div></div>");
                     let tdiv=txt.next();
 
-                    mmjs.mmrun(txt.html(),tdiv);
+                    let vh=txt.val()
+                        .replace(/\$\/textarea>/g,"</textarea>")
+                        .replace(/\$textarea/g,"<textarea");
+                            
+                    if (!vh) vh=txt.html();
+                    mmjs.mmrun(vh,tdiv);
 
                     $(kk[i]).css("display","none");
                 }
