@@ -85,7 +85,7 @@ mmdocss:function()
     +'.mmresult{padding:1.5em 1em 1em 1em;border:1px solid #000000;}.mmresult::before{content:"執行結果";position:absolute;transform: translate(-0.3em, -2.3em);background-color:#ffffff;padding:0 0.5em 0 0.5em;border:1px solid #000000;}'
     +"</style>");
 }};
-(function()
+$(function()
 {
     let kk=$("textarea.markdown_mm,mmjs");
 
@@ -121,4 +121,4 @@ mmdocss:function()
         mmjs.mmdocss();
     }
 
-})();
+});
