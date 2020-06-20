@@ -111,6 +111,18 @@ $(function()
             .replace(/\$textarea/g,"<textarea");
                 
         if (!vh) vh=txt.html();
+
+        let addbtn=""
+        +"<button onclick='$(this).parent().parent().css(\"font-size\","
+        +"parseInt($(this).parent().parent().css(\"font-size\"))*1.1+\"px\""
+        +")' style='width:3em;font-size:1em;'>+</button>&nbsp;&nbsp;"
+        +"<button onclick='$(this).parent().parent().css(\"font-size\","
+        +"parseInt($(this).parent().parent().css(\"font-size\"))*0.9+\"px\""
+        +")' style='width:3em;font-size:1em;'>-</button><br><br>";
+
+        if (txt.attr("zoom"))
+            vh=addbtn+vh;
+
         mmjs.mmrun(vh,tdiv);
 
         $(kk[i]).css("display","none");

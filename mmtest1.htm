@@ -8,7 +8,7 @@
 # testmm            
         </mmjs>
 
-            <textarea class="markdown_mm" style="display: block;">
+            <textarea class="markdown_mm" style="display: block;" zoom=true>
 以這篇文章為例，在 Blogger 看 HTML 原始碼長這樣，最大缺點是每篇文章必須給不一樣的 ID ，以及 textarea 這個關鍵字必須特別處理
 
 ```
@@ -169,6 +169,18 @@ mmdocss:function()
                         .replace(/\$textarea/g,"<textarea");
                             
                     if (!vh) vh=txt.html();
+
+                    let addbtn=""
+                        +"<button onclick='$(this).parent().parent().css(\"font-size\","
+                        +"parseInt($(this).parent().parent().css(\"font-size\"))*1.1+\"px\""
+                        +")' style='width:3em;font-size:1em;'>+</button>&nbsp;&nbsp;"
+                        +"<button onclick='$(this).parent().parent().css(\"font-size\","
+                        +"parseInt($(this).parent().parent().css(\"font-size\"))*0.9+\"px\""
+                        +")' style='width:3em;font-size:1em;'>-</button><br><br>";
+
+                    if (txt.attr("zoom"))
+                        vh=addbtn+vh;
+
                     mmjs.mmrun(vh,tdiv);
 
                     $(kk[i]).css("display","none");
