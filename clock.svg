@@ -1,0 +1,31 @@
+<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" stroke="#000">
+<circle id="a120207_o1" cx="150" cy="150" r="140" fill="none" stroke="#000" stroke-width="2"></circle>
+<g id="a120207_g3">
+<g id="a120207_g2">
+<g id="a120207_g1">
+<line x1="10" y1="150" x2="40" y2="150" stroke-width="3"></line>
+<defs>
+<line id="a120207_d1" x1="10" y1="150" x2="20" y2="150"></line>
+</defs>
+<use xlink:href="#a120207_d1" transform="rotate(6,150,150)"></use>
+<use xlink:href="#a120207_d1" transform="rotate(12,150,150)"></use>
+<use xlink:href="#a120207_d1" transform="rotate(18,150,150)"></use>
+<use xlink:href="#a120207_d1" transform="rotate(24,150,150)"></use>
+</g>
+<use xlink:href="#a120207_g1" transform="rotate(30,150,150)"></use>
+<use xlink:href="#a120207_g1" transform="rotate(60,150,150)"></use>
+</g>
+<use xlink:href="#a120207_g2" transform="rotate(90,150,150)"></use>
+</g>
+<use xlink:href="#a120207_g3" transform="rotate(180,150,150)"></use>
+<line id="a120207_hh" x1="150" y1="150" x2="150" y2="80" stroke-width="10">
+  <animateTransform attributeName="transform" type="rotate" values="0,150,150;360,150,150" dur="1440s" repeatCount="indefinite"></animateTransform>
+</line>
+<line id="a120207_mm" x1="150" y1="150" x2="150" y2="50" stroke-width="6">
+  <animateTransform attributeName="transform" type="rotate" values="0,150,150;360,150,150" dur="120s" repeatCount="indefinite"></animateTransform>
+</line>
+<line id="a120207_ss" x1="150" y1="150" x2="150" y2="30" stroke-width="2" stroke="#f00">
+  <animateTransform attributeName="transform" type="rotate" values="0,150,150;360,150,150" dur="2s" repeatCount="indefinite"></animateTransform>
+</line>
+<circle id="o2" cx="150" cy="150" r="8"></circle>
+</svg>
